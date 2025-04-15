@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Database\Database;
@@ -66,5 +67,30 @@ class UserModel
         $stmt = $db->prepare($sql);
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Ajouter cette méthode à votre classe UserModel existante
+    public static function searchUsers($term, $excludeUserId = null)
+    {
+        $db = Database::getConnection();
+        $sql = "SELECT id, nom, prenom, email 
+            FROM users 
+            WHERE (nom ILIKE :term OR prenom ILIKE :term OR email ILIKE :term)";
+
+        if ($excludeUserId !== null) {
+            $sql .= " AND id != :exclude_id";
+        }
+
+        $sql .= " ORDER BY nom, prenom LIMIT 20";
+
+        $stmt = $db->prepare($sql);
+        $params = [':term' => '%' . $term . '%'];
+
+        if ($excludeUserId !== null) {
+            $params[':exclude_id'] = $excludeUserId;
+        }
+
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
