@@ -34,6 +34,22 @@ switch ($uri) {
         $controller = new AuthController();
         $controller->inscription();
         break;
+
+    
+    case '/profil': 
+        $controller = new UserController();
+        $controller->afficherProfil();
+        break;
+        
+    case '/modifier-compte':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new UserController();
+            $controller->modifierCompte();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+
     case '/deconnexion':
         $controller = new AuthController();
         $controller->deconnexion();
