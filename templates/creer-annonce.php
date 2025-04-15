@@ -19,4 +19,4 @@
 
 <?php
 $content = ob_get_clean();
-require __DIR__ . '/layout.php';
+require __DIR__ . '/layout.php'; 

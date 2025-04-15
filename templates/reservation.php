@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\AnnonceModel;
 
 ob_start();
@@ -34,8 +35,8 @@ $reservations = AnnonceModel::getReservationsByUser($_SESSION['user_id']);
                     </div>
                     <div class="reservation-card-footer">
                         <div class="actions">
-                            <a href="/supprimer-reservation?id=<?= $reservation['id'] ?>" 
-                               onclick="return confirm('Voulez-vous vraiment supprimer cette réservation ?')">Supprimer</a>
+                            <a href="/supprimer-reservation?id=<?= $reservation['id'] ?>"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cette réservation ?')">Supprimer</a>
                         </div>
                     </div>
                 </div>
