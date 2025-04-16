@@ -16,7 +16,7 @@ ob_start();
         <?php foreach ($annonces as $annonceItem): ?>
             <div class="annonce-card">
                 <?php if (!empty($annonceItem['image'])): ?>
-                    <img src="/uploads/<?= htmlspecialchars($annonceItem['image']) ?>" alt="Image de l'annonce">
+                    <img src="/images/<?= htmlspecialchars($annonceItem['image']) ?>" alt="Image de l'annonce">
                 <?php endif; ?>
                 <div class="annonce-card-content">
                     <div class="annonce-card-title"><?= htmlspecialchars($annonceItem['titre']) ?></div>
@@ -34,9 +34,18 @@ ob_start();
                         </div>
                         <div class="actions">
                             <?php if (isset($_SESSION['user_id'])): ?>
+                                <?php if ($_SESSION['user_id'] === $annonceItem['user_id']): ?>
+                                    <a href="/modifier-annonce?id=<?= $annonceItem['id'] ?>" class="btn btn-sm btn-secondary">Modifier</a>
+                                    <a href="/supprimer-annonce?id=<?= $annonceItem['id'] ?>" class="btn btn-sm btn-danger">Supprimer</a>
+                                <?php else: ?>
+                                    <form action="/reserver-annonce" method="POST">
+                                        <input type="hidden" name="annonce_id" value="<?= $annonceItem['id'] ?>">
+                                        <button type="submit" class="btn btn-sm btn-primary">Réserver</button>
+                                    </form>
+                                <?php endif; ?>
                                 <form action="/sendMessageToAdvertiser" method="POST">
                                     <input type="hidden" name="annonce_id" value="<?= $annonceItem['id'] ?>">
-                                    <button type="submit">Envoyer un message</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">Envoyer un message</button>
                                 </form>
                             <?php endif; ?>
                         </div>

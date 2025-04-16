@@ -36,7 +36,7 @@ $reservations = AnnonceModel::getReservationsByUser($_SESSION['user_id']);
                     <div class="reservation-card-footer">
                         <div class="actions">
                             <a href="/supprimer-reservation?id=<?= $reservation['id'] ?>"
-                                onclick="return confirm('Voulez-vous vraiment supprimer cette réservation ?')">Supprimer</a>
+                               onclick="return confirm('Voulez-vous vraiment supprimer cette réservation ?')">Supprimer</a>
                         </div>
                     </div>
                 </div>
@@ -50,3 +50,4 @@ $reservations = AnnonceModel::getReservationsByUser($_SESSION['user_id']);
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/layout.php';
+?>

@@ -118,6 +118,19 @@ switch ($uri) {
         }
         break;
 
+
+    case '/messages/supprimer-conversation':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new MessageController();
+        // Assurez-vous que la méthode est bien 'supprimerConversation'
+            $controller->supprimerConversation();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+
+
+
     // Route pour envoyer un message à l'annonceur
     case '/sendMessageToAdvertiser':
         if (isset($_SESSION['user_id'])) {

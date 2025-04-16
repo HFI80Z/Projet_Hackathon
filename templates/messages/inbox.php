@@ -11,6 +11,7 @@
    <div class="conversations-list">
       <?php foreach ($conversations as $conv): ?>
          <div class="conversation-item">
+            <!-- Lien vers la conversation -->
             <a href="/messages/conversation?id=<?= $conv['contact_id'] ?>">
                <div class="contact-info">
                   <strong><?= htmlspecialchars($conv['prenom'] . ' ' . $conv['nom']) ?></strong>
@@ -22,6 +23,12 @@
                   <?= date('d/m/Y H:i', strtotime($conv['last_message_date'])) ?>
                </div>
             </a>
+
+            <!-- Bouton pour supprimer la conversation -->
+            <a href="/messages/supprimer-conversation?id=<?= $conv['contact_id'] ?>"
+               onclick="return confirm('Voulez-vous vraiment supprimer cette conversation ?')"
+               class="btn btn-danger btn-sm"
+               style="margin-left: 10px;">Supprimer</a>
          </div>
       <?php endforeach; ?>
    </div>
