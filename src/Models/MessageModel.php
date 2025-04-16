@@ -46,27 +46,36 @@ class MessageModel
    {
       $db = Database::getConnection();
       $sql = "SELECT 
-                    DISTINCT 
-                    CASE 
-                        WHEN m.sender_id = :userId THEN m.receiver_id 
-                        ELSE m.sender_id 
-                    END as contact_id,
-                    u.nom, u.prenom,
-                    (SELECT COUNT(*) FROM messages 
-                     WHERE receiver_id = :userId 
-                     AND sender_id = contact_id 
-                     AND is_read = false) as unread_count,
-                    (SELECT created_at FROM messages 
-                     WHERE (sender_id = :userId AND receiver_id = contact_id)
-                     OR (sender_id = contact_id AND receiver_id = :userId)
-                     ORDER BY created_at DESC LIMIT 1) as last_message_date
-                FROM messages m
-                JOIN users u ON u.id = CASE 
+                DISTINCT 
+                CASE 
+                    WHEN m.sender_id = :userId THEN m.receiver_id 
+                    ELSE m.sender_id 
+                END as contact_id,
+                u.nom, u.prenom,
+                (SELECT COUNT(*) FROM messages 
+                 WHERE receiver_id = :userId 
+                 AND sender_id = CASE 
+                                    WHEN m.sender_id = :userId THEN m.receiver_id 
+                                    ELSE m.sender_id 
+                                  END 
+                 AND is_read = false) as unread_count,
+                (SELECT created_at FROM messages 
+                 WHERE (sender_id = :userId AND receiver_id = CASE 
+                                                                WHEN m.sender_id = :userId THEN m.receiver_id 
+                                                                ELSE m.sender_id 
+                                                              END)
+                 OR (sender_id = CASE 
+                                    WHEN m.sender_id = :userId THEN m.receiver_id 
+                                    ELSE m.sender_id 
+                                  END AND receiver_id = :userId)
+                 ORDER BY created_at DESC LIMIT 1) as last_message_date
+            FROM messages m
+            JOIN users u ON u.id = CASE 
                                         WHEN m.sender_id = :userId THEN m.receiver_id 
                                         ELSE m.sender_id 
                                     END
-                WHERE m.sender_id = :userId OR m.receiver_id = :userId
-                ORDER BY last_message_date DESC";
+            WHERE m.sender_id = :userId OR m.receiver_id = :userId
+            ORDER BY last_message_date DESC";
       $stmt = $db->prepare($sql);
       $stmt->execute([':userId' => $userId]);
       return $stmt->fetchAll(PDO::FETCH_ASSOC);

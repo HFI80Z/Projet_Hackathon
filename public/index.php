@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Controllers\AuthController;
 use App\Controllers\UserController;
 use App\Controllers\AnnonceController;
-use App\Controllers\MessageController; // Ajout du nouveau contrôleur
+use App\Controllers\MessageController;
 use App\Database\Database;
 use App\Models\AnnonceModel;
 use App\Controllers\OtherController;
@@ -76,21 +76,12 @@ switch ($uri) {
         $controller->supprimerReservation();
         break;
     
-    case '/modifier-compte':
-        if (isset($_SESSION['user_id'])) {
-        $controller = new UserController();
-        $controller->modifierCompte();
-    } else {
-        header('Location: /connexion');
-    }
-    break;
-
     case '/deconnexion':
         $controller = new AuthController();
         $controller->deconnexion();
         break;
 
-    // Nouvelles routes pour le système de messagerie
+    // Routes pour les messages
     case '/messages':
         if (isset($_SESSION['user_id'])) {
             $controller = new MessageController();
@@ -127,9 +118,20 @@ switch ($uri) {
         }
         break;
 
+    // Route pour envoyer un message à l'annonceur
+    case '/sendMessageToAdvertiser':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new AnnonceController();
+            $controller->sendMessageToAdvertiser();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+
     default:
         // 404 - Page introuvable
         http_response_code(404);
         echo "Oups ! Page introuvable.";
         break;
 }
+?>

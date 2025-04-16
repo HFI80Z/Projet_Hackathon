@@ -1,10 +1,14 @@
 <?php
+
 namespace App\Controllers;
 
+use App\Models\MessageModel;
 use App\Models\AnnonceModel;
+use App\Database\Database;
 
 class AnnonceController
 {
+    // Affiche toutes les annonces
     public function index()
     {
         // Récupérer toutes les annonces depuis le modèle
@@ -14,6 +18,45 @@ class AnnonceController
         require __DIR__ . '/../../templates/accueil.php';
     }
 
+    // Envoie un message automatiquement à l'utilisateur ayant posté l'annonce
+    public function sendMessageToAdvertiser()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /connexion');
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+        $annonceId = $_POST['annonce_id'] ?? null;
+
+        if (!$annonceId) {
+            header('Location: /accueil');
+            exit;
+        }
+
+        // Récupérer l'utilisateur qui a posté l'annonce
+        $db = Database::getConnection();
+        $stmt = $db->prepare("SELECT user_id FROM annonces WHERE id = :annonceId");
+        $stmt->execute([':annonceId' => $annonceId]);
+        $advertiser = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$advertiser) {
+            header('Location: /accueil');
+            exit;
+        }
+
+        $receiverId = $advertiser['user_id'];
+        $message = "Je suis intéressé par ton annonce";
+
+        // Envoi du message via MessageModel
+        MessageModel::sendMessage($userId, $receiverId, $message);
+
+        // Rediriger vers la boîte de réception des messages
+        header('Location: /messages');
+        exit;
+    }
+
+    // Ajoute une annonce
     public function ajouterAnnonce()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -50,6 +93,7 @@ class AnnonceController
         header('Location: /accueil');
     }
 
+    // Modifie une annonce
     public function modifierAnnonce()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -103,6 +147,7 @@ class AnnonceController
         exit;
     }
 
+    // Supprime une annonce
     public function supprimerAnnonce()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -123,6 +168,7 @@ class AnnonceController
         header('Location: /accueil');
     }
 
+    // Réserve une annonce
     public function reserverAnnonce()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -142,6 +188,7 @@ class AnnonceController
         header('Location: /accueil');
     }
 
+    // Supprime une réservation
     public function supprimerReservation()
     {
         if (!isset($_SESSION['user_id'])) {
