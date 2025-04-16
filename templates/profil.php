@@ -1,17 +1,20 @@
 <?php ob_start(); ?>
-
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Header Section -->
+    <div class="mt-8">
+            <a href="/" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Retour à l'accueil
+            </a>
+        </div>
     <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
         <div class="flex items-center space-x-6">
-            <!-- Avatar -->
             <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center">
                 <span class="text-blue-600 text-2xl font-bold">
                     <?= strtoupper(substr($user['prenom'], 0, 1) . substr($user['nom'], 0, 1)) ?>
                 </span>
             </div>
-            
-            <!-- User Info -->
             <div>
                 <h1 class="text-3xl font-bold text-gray-900 mb-1">
                     <?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?>
@@ -28,10 +31,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Details Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Personal Info Card -->
         <div class="bg-white rounded-xl shadow-sm p-6">
             <h2 class="text-xl font-semibold mb-4 flex items-center">
                 <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,18 +60,7 @@
                     </dd>
                 </div>
             </dl>
-            
-            <div class="mt-6">
-                <a href="/modifier-compte" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                    </svg>
-                    Modifier le profil
-                </a>
-            </div>
         </div>
-
-        <!-- Additional Section (Optional) -->
         <div class="bg-white rounded-xl shadow-sm p-6">
             <h2 class="text-xl font-semibold mb-4 flex items-center">
                 <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,16 +84,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Back Link -->
-    <div class="mt-8">
-        <a href="/" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
-            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Retour à l'accueil
-        </a>
     </div>
 </div>
 
