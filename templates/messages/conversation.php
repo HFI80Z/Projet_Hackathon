@@ -7,13 +7,21 @@
 
 <div class="messages-container">
    <?php foreach ($messages as $message): ?>
-      <?php $isCurrentUser = $message['sender_id'] == $_SESSION['user_id']; ?>
+      <?php 
+         // Vérifie si le message est envoyé par l'utilisateur actuel
+         $isCurrentUser = $message['sender_id'] == $_SESSION['user_id']; 
+         // Si l'utilisateur est l'expéditeur, on affiche 'Vous', sinon le prénom et nom du message
+         $senderFirstName = $isCurrentUser ? 'Vous' : htmlspecialchars($message['sender_prenom']);
+         $senderLastName = $isCurrentUser ? '' : htmlspecialchars($message['sender_nom']);
+      ?>
       <div class="message <?= $isCurrentUser ? 'sent' : 'received' ?>">
-         <div class="message-content">
-            <?= nl2br(htmlspecialchars($message['content'])) ?>
+         <div class="message-header">
+            <strong><?= $senderFirstName ?> <?= $senderLastName ?></strong>
+            <small><?= date('d/m/Y H:i', strtotime($message['created_at'])) ?></small>
          </div>
-         <div class="message-meta">
-            <?= date('d/m/Y H:i', strtotime($message['created_at'])) ?>
+         <div class="message-content">
+            <!-- Affichage du contenu du message ou texte par défaut si vide -->
+            <?= nl2br(htmlspecialchars($message['content'] ?? 'Message par défaut')) ?>
          </div>
       </div>
    <?php endforeach; ?>

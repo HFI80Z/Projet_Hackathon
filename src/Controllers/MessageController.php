@@ -88,6 +88,7 @@ class MessageController
       // Si le formulaire est soumis pour rechercher un utilisateur
       $searchTerm = $_GET['search'] ?? '';
       if (!empty($searchTerm)) {
+         // Correction : on appelle UserModel::searchUsers() et non MessageModel
          $users = UserModel::searchUsers($searchTerm, $userId);
       } else {
          // Obtenir tous les utilisateurs avec qui on a déjà des messages
@@ -95,5 +96,26 @@ class MessageController
       }
 
       require __DIR__ . '/../../templates/messages/new.php';
+   }
+
+   // Supprimer une conversation
+   public function supprimerConversation()
+   {
+      if (!isset($_SESSION['user_id'])) {
+         header('Location: /connexion');
+         exit;
+      }
+
+      $userId = $_SESSION['user_id'];
+      $contactId = $_GET['id'] ?? null;
+
+      if ($contactId) {
+         // Supprime tous les messages échangés entre userId et contactId
+         MessageModel::deleteConversation($userId, $contactId);
+      }
+
+      // Rediriger vers la boîte de réception
+      header('Location: /messages');
+      exit;
    }
 }

@@ -12,22 +12,25 @@
    <button type="submit" class="btn btn-primary">Rechercher</button>
 </form>
 
-<?php if (isset($users) && !empty($users)): ?>
-   <div class="user-list">
-      <?php foreach ($users as $user): ?>
-         <div class="user-item">
-            <div class="user-info">
-               <strong><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></strong>
-               <?php if (isset($user['unread_count']) && $user['unread_count'] > 0): ?>
-                  <span class="badge unread-badge"><?= $user['unread_count'] ?></span>
-               <?php endif; ?>
-            </div>
-            <a href="/messages/conversation?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Envoyer un message</a>
-         </div>
-      <?php endforeach; ?>
-   </div>
-<?php elseif (isset($searchTerm) && !empty($searchTerm)): ?>
-   <p>Aucun utilisateur trouvé pour "<?= htmlspecialchars($searchTerm) ?>".</p>
+<?php if (isset($searchTerm) && !empty($searchTerm)): ?>
+    <!-- Affichage uniquement après recherche -->
+    <?php if (isset($users) && !empty($users)): ?>
+        <div class="user-list">
+            <?php foreach ($users as $user): ?>
+                <div class="user-item">
+                    <div class="user-info">
+                        <strong><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></strong>
+                        <?php if (isset($user['unread_count']) && $user['unread_count'] > 0): ?>
+                            <span class="badge unread-badge"><?= $user['unread_count'] ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <a href="/messages/conversation?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Envoyer un message</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p>Aucun utilisateur trouvé pour "<?= htmlspecialchars($searchTerm) ?>".</p>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php
