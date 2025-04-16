@@ -6,7 +6,6 @@
             Créez votre compte pour commencer à utiliser Chakou
         </p>
     </div>
-
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form class="space-y-6" action="/inscription" method="post">
@@ -18,7 +17,6 @@
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         </div>
                     </div>
-
                     <div>
                         <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
                         <div class="mt-1">
@@ -27,7 +25,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <div class="mt-1">
@@ -35,7 +32,6 @@
                             class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     </div>
                 </div>
-
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
                     <div class="mt-1">
@@ -44,7 +40,6 @@
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Minimum 8 caractères</p>
                 </div>
-
                 <div>
                     <label for="region" class="block text-sm font-medium text-gray-700">Région</label>
                     <div class="mt-1">
@@ -66,7 +61,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="flex items-center">
                     <input id="terms" name="terms" type="checkbox"
                         class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
@@ -74,7 +68,6 @@
                         J'accepte les <a href="/conditions" class="text-blue-600 hover:text-blue-500">conditions d'utilisation</a>
                     </label>
                 </div>
-
                 <div>
                     <button type="submit"
                         class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -82,7 +75,6 @@
                     </button>
                 </div>
             </form>
-
             <div class="mt-6">
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
@@ -92,7 +84,6 @@
                         <span class="px-2 bg-white text-gray-500">Déjà un compte ?</span>
                     </div>
                 </div>
-
                 <div class="mt-6">
                     <a href="/connexion"
                         class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">

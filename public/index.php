@@ -80,6 +80,19 @@ switch ($uri) {
         $controller = new AuthController();
         $controller->deconnexion();
         break;
+    case '/modifier-compte':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new UserController();
+            $controller->modifierCompte();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+    case '/contact': 
+        $controller = new OtherController();
+        $controller->contact();
+        break;
+    
 
     // Routes pour les messages
     case '/messages':

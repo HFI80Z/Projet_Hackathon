@@ -1,8 +1,6 @@
 <?php  
 ob_start(); 
 ?>
-
-<!-- Hero Banner -->
 <div class="relative bg-gradient-to-r from-blue-800 to-blue-900 text-white py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Bienvenue sur Chakou</h1>
@@ -14,8 +12,6 @@ ob_start();
         </div>
     </div>
 </div>
-
-<!-- Main Content -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
     <?php if (!isset($annonce)): ?>
@@ -97,6 +93,12 @@ ob_start();
         <?php endif; ?>
     <?php endif; ?>
 </div>
+<pre>
+<?php
+session_start();
+print_r($_SESSION);
+?>
+</pre>
 
 <?php
 $content = ob_get_clean();
