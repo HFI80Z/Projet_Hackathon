@@ -18,8 +18,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center h-16">
                     <a href="/" class="flex-shrink-0 flex items-center h-full">
-                        <img class="max-h-full w-auto" src="/images/logo.png" alt="Logo Efrei BNB">
-                        <span class="ml-2 text-xl font-semibold text-blue-900">Efrei BNB</span>
+                        <img class="max-h-[200px] max-w-[200px] object-contain" src="/images/logo.png" alt="Logo Efrei BNB">
                     </a>
                 </div>
                 <?php $current = $_SERVER['REQUEST_URI']; ?>
