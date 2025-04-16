@@ -10,6 +10,16 @@
         body {
             font-family: 'Montserrat', sans-serif;
         }
+
+        nav {
+            height: 70px; 
+        }
+
+        main {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-50">
@@ -48,7 +58,6 @@
                             </svg>
                             <img class="h-8 w-8 rounded-full" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Compte">
                         </button>
-
                         <div class="user-menu-content hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
@@ -63,14 +72,6 @@
                         <?php endif; ?>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="md:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="/" class="bg-blue-50 border-blue-900 text-blue-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Accueil</a>
-                <a href="/reservation" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Réservation</a>
-                <a href="/creer-annonce" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Mettre une annonce</a>
-                <a href="/contact" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Nous contacter</a>
             </div>
         </div>
     </nav>
@@ -90,23 +91,28 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.querySelector(".user-menu button");
-            const menuContent = document.querySelector(".user-menu-content");
-
-            toggleButton.addEventListener("click", function (e) {
-                e.stopPropagation();
-                menuContent.classList.toggle("hidden");
-            });
-
-            document.addEventListener("click", function () {
-                menuContent.classList.add("hidden");
-            });
-
-            menuContent.addEventListener("click", function (e) {
-                e.stopPropagation();
-            });
+    document.addEventListener("DOMContentLoaded", function() {
+        const navbar = document.querySelector("nav");
+        let lastScrollTop = 0;
+        
+        // Ajoutez ces classes dans votre style existant
+        navbar.style.transition = "transform 0.3s ease-in-out";
+        
+        window.addEventListener("scroll", function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Déterminer la direction du défilement
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Défilement vers le bas et pas tout en haut
+                navbar.style.transform = "translateY(-100%)";
+            } else {
+                // Défilement vers le haut
+                navbar.style.transform = "translateY(0)";
+            }
+            
+            lastScrollTop = scrollTop;
         });
-    </script>
+    });
+</script>
 </body>
 </html>
