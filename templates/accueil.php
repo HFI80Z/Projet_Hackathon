@@ -3,7 +3,7 @@ ob_start();
 ?>
 <div class="relative bg-gradient-to-r from-blue-800 to-blue-900 text-white py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Bienvenue sur Chakou</h1>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Bienvenue sur Efrei BNB</h1>
         <p class="text-xl mb-8">Trouvez le logement parfait pour votre prochain voyage</p>
         <div class="cta">
             <a href="/creer-annonce" class="inline-block bg-white text-blue-800 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition duration-300 shadow-lg">
@@ -30,7 +30,6 @@ ob_start();
                                 <span class="text-gray-500">Pas d'image</span>
                             </div>
                         <?php endif; ?>
-                        
                         <div class="p-5">
                             <div class="flex justify-between items-start">
                                 <h3 class="annonce-card-title text-lg font-semibold text-gray-800 mb-2">
@@ -41,7 +40,6 @@ ob_start();
                                     <span>4,9</span>
                                 </div>
                             </div>
-                            
                             <div class="annonce-card-location text-gray-600 mb-4 line-clamp-2">
                                 <?= nl2br(htmlspecialchars($annonceItem['description'])) ?>
                             </div>
@@ -51,14 +49,12 @@ ob_start();
                                     <?= htmlspecialchars($annonceItem['prix']) ?> € <span class="font-normal text-gray-600">/ nuit</span>
                                 </div>
                             </div>
-                            
                             <div class="annonce-card-footer border-t border-gray-100 pt-4">
                                 <div class="created-by text-sm text-gray-500 mb-3">
                                     <a href="/profil?id=<?= htmlspecialchars($annonceItem['user_id']) ?>" class="hover:text-blue-800">
                                         Créé par : <?= htmlspecialchars($annonceItem['prenom'] . ' ' . $annonceItem['nom']) ?>
                                     </a>
                                 </div>
-                                
                                 <div class="actions flex justify-end space-x-4 text-sm">
                                     <?php if (isset($_SESSION['user_id'])): ?>
                                         <?php if ($_SESSION['user_id'] == $annonceItem['user_id']): ?>
@@ -94,12 +90,6 @@ ob_start();
     <?php endif; ?>
 </div>
 <pre>
-<?php
-session_start();
-print_r($_SESSION);
-?>
-</pre>
-
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/layout.php';
