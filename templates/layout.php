@@ -51,15 +51,17 @@
                         </button>
 
                         <div class="user-menu-content hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="/modifier-compte" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Compte</a>
-                                <a href="/messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Messages</a>
-                                <a href="/deconnexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
-                            <?php else: ?>
-                                <a href="/connexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a>
-                                <a href="/inscription" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inscription</a>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Panel Administrateur</a>
                             <?php endif; ?>
-                        </div>
+                            <a href="/modifier-compte" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Compte</a>
+                            <a href="/messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Messages</a>
+                            <a href="/deconnexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
+                        <?php else: ?>
+                            <a href="/connexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a>
+                            <a href="/inscription" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inscription</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

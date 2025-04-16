@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 
 <div class="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
-    <!-- Header avec photo de fond -->
     <div class="relative bg-blue-600 h-48">
         <div class="absolute inset-0 bg-black opacity-30"></div>
         <div class="relative max-w-5xl mx-auto px-6 h-full flex items-center">
@@ -11,11 +10,8 @@
             </div>
         </div>
     </div>
-
-    <!-- Contenu principal avec un espacement ajouté sous le header -->
-    <div class="max-w-5xl mx-auto px-6 mt-12"> <!-- Ajout de mt-12 pour l'espacement -->
+    <div class="max-w-5xl mx-auto px-6 mt-12">
         <div class="flex flex-col md:flex-row gap-8">
-            <!-- Sidebar -->
             <div class="w-full md:w-1/3">
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                     <!-- Photo de profil -->
@@ -58,28 +54,21 @@
                         
                         <form action="/modifier-compte" method="POST" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Prénom -->
                                 <div>
                                     <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
                                     <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($user['prenom']) ?>" 
                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                                 </div>
-                                 
-                                <!-- Nom -->
                                 <div>
                                     <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                                     <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" 
                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                                 </div>
-                                 
-                                <!-- Email -->
                                 <div class="md:col-span-2">
                                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Adresse email</label>
                                     <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" 
                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                                 </div>
-                                 
-                                <!-- Région -->
                                 <div class="md:col-span-2">
                                     <label for="region" class="block text-sm font-medium text-gray-700 mb-1">Région</label>
                                     <select id="region" name="region" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
@@ -88,10 +77,15 @@
                                         <option value="Nouvelle-Aquitaine" <?= $user['region'] === 'Nouvelle-Aquitaine' ? 'selected' : '' ?>>Nouvelle-Aquitaine</option>
                                         <option value="Occitanie" <?= $user['region'] === 'Occitanie' ? 'selected' : '' ?>>Occitanie</option>
                                         <option value="Hauts-de-France" <?= $user['region'] === 'Hauts-de-France' ? 'selected' : '' ?>>Hauts-de-France</option>
+                                        <option value="Provence-Alpes-Côte d'Azur" <?= $user['region'] === 'Provence-Alpes-Côte d\'Azur' ? 'selected' : '' ?>>Provence-Alpes-Côte d'Azur</option>
+                                        <option value="Pays de la Loire" <?= $user['region'] === 'Pays de la Loire' ? 'selected' : '' ?>>Pays de la Loire</option>
+                                        <option value="Bretagne" <?= $user['region'] === 'Bretagne' ? 'selected' : '' ?>>Bretagne</option>
+                                        <option value="Normandie" <?= $user['region'] === 'Normandie' ? 'selected' : '' ?>>Normandie</option>
+                                        <option value="Grand Est" <?= $user['region'] === 'Grand Est' ? 'selected' : '' ?>>Grand Est</option>
+                                        <option value="Centre-Val de Loire" <?= $user['region'] === 'Centre-Val de Loire' ? 'selected' : '' ?>>Centre-Val de Loire</option>
+                                        <option value="Bourgogne-Franche-Comté" <?= $user['region'] === 'Bourgogne-Franche-Comté' ? 'selected' : '' ?>>Bourgogne-Franche-Comté</option>
                                     </select>
                                 </div>
-                                 
-                                <!-- Photo de profil -->
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">Photo de profil</label>
                                     <div class="mt-1 flex items-center">
@@ -106,7 +100,6 @@
                                     </div>
                                 </div>
                             </div>
-                             
                             <div class="pt-6 border-t border-gray-200 flex justify-end space-x-3">
                                 <button type="button" class="px-6 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                     Annuler

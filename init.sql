@@ -30,14 +30,15 @@ CREATE TABLE IF NOT EXISTS reservations (
     CONSTRAINT fk_reservations_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS messages (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
-    message TEXT NOT NULL,
+    content TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_messages_sender FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT fk_messages_receiver FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS subscriptions (
@@ -52,7 +53,8 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 );
 
 INSERT INTO users (email, password, nom, prenom, region, role)
-VALUES ('admin@admin.com', 'admin_password_hash', 'Admin', 'Super', 'Paris', 'admin');
+VALUES ('admin@admin.com', '$2y$10$LSqcZjmthp6BPe9yN6p9nOsWEe19t5TmX4/iPB6g/dlkNVCLQiIBq', 'Admin', 'Super', 'Paris', 'admin');
+<-- Password: 123 pour admin
 
 INSERT INTO annonces (titre, description, prix, user_id, image)
 VALUES ('Appartement à louer', 'Appartement cosy au centre-ville', 120.00, 1, 'appartement.jpg');
