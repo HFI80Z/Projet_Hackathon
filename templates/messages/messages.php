@@ -17,7 +17,6 @@ if (isset($_GET['conversation_id'])) {
     // Démarrer une nouvelle conversation si une annonce est sélectionnée
     $annonceDetails = AnnonceModel::getAnnonceById($_GET['annonce_id']);
 }
-
 ?>
 
 <div class="messages-page">
@@ -47,8 +46,12 @@ if (isset($_GET['conversation_id'])) {
             <div class="messages">
                 <?php foreach ($selectedConversation as $message): ?>
                     <div class="message <?= $message['sender_id'] == $_SESSION['user_id'] ? 'sent' : 'received' ?>">
+                        <!-- Affichage du prénom de la personne avant le message -->
+                        <div class="message-header">
+                            <strong><?= htmlspecialchars($message['prenom']) ?> <?= htmlspecialchars($message['nom']) ?></strong>
+                            <small><?= date('d/m/Y H:i', strtotime($message['created_at'])) ?></small>
+                        </div>
                         <p><?= nl2br(htmlspecialchars($message['message'])) ?></p>
-                        <small><?= date('d/m/Y H:i', strtotime($message['created_at'])) ?></small>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -56,7 +59,7 @@ if (isset($_GET['conversation_id'])) {
             <!-- Formulaire pour envoyer un message -->
             <form action="/messages/envoyer" method="post" class="message-form">
                 <input type="hidden" name="receiver_id" value="<?= $selectedConversation[0]['contact_id'] ?>">
-                <textarea name="content" required></textarea>
+                <textarea name="content" required placeholder="Votre message..."></textarea>
                 <button type="submit">Envoyer</button>
             </form>
         <?php else: ?>
@@ -74,4 +77,3 @@ if (isset($_GET['conversation_id'])) {
         <?php endif; ?>
     </div>
 </div>
-

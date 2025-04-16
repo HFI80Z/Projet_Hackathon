@@ -20,15 +20,27 @@ class OtherController
             // Gestion de l'image
             $imageName = null;
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/../../public/uploads/';
+                // Mettre à jour le chemin vers le répertoire public/images
+                $uploadDir = __DIR__ . '/../../public/images/';
+                // Assurez-vous que ce dossier existe
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true); // Créer le répertoire si nécessaire
+                }
                 $tmpFile = $_FILES['image']['tmp_name'];
                 $originalName = $_FILES['image']['name'];
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
                 $imageName = uniqid('img_', true) . '.' . $extension;
-                move_uploaded_file($tmpFile, $uploadDir . $imageName);
+
+                // Déplacer l'image téléchargée dans le répertoire public/images/
+                if (!move_uploaded_file($tmpFile, $uploadDir . $imageName)) {
+                    // Afficher un message d'erreur si l'image ne peut pas être déplacée
+                    echo "Erreur lors du téléchargement de l'image.";
+                    exit;
+                }
             }
 
             if (!empty($titre) && !empty($description)) {
+                // Appeler la méthode pour enregistrer l'annonce avec l'image
                 \App\Models\AnnonceModel::createAnnonce($titre, $description, $prix, $user_id, $imageName);
             }
 

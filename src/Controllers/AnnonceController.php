@@ -51,8 +51,8 @@ class AnnonceController
         // Envoi du message via MessageModel
         MessageModel::sendMessage($userId, $receiverId, $message);
 
-        // Rediriger vers la boîte de réception des messages
-        header('Location: /messages');
+        // Rediriger vers la conversation avec l'utilisateur qui a posté l'annonce
+        header('Location: /messages/conversation?id=' . $receiverId);
         exit;
     }
 
@@ -101,6 +101,7 @@ class AnnonceController
             exit;
         }
 
+        // Récupérer l'ID de l'annonce à modifier
         $annonceId = $_GET['id'] ?? null;
 
         if ($annonceId) {
@@ -176,11 +177,12 @@ class AnnonceController
             exit;
         }
 
-        $annonceId = $_GET['id'] ?? null;
+        $annonceId = $_POST['annonce_id'] ?? null;
         $userId = $_SESSION['user_id'];
 
         if ($annonceId) {
             AnnonceModel::reserverAnnonce($annonceId, $userId);
+            // Rediriger vers la page des réservations
             header('Location: /reservation');
             exit;
         }
