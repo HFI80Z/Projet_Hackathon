@@ -16,15 +16,13 @@ class AuthController
 
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_prenom'] = $user['prenom']; // Ajouter le prénom dans la session
+                $_SESSION['user_prenom'] = $user['prenom'];
+                $_SESSION['role'] = $user['role']; // 👈 Ajoute cette ligne
                 header('Location: /');
                 exit;
-            } else {
-                $error = "Identifiants invalides";
-                require __DIR__ . '/../../templates/connexion.php';
-                return;
             }
-        }
+
+    }
 
         // Afficher le formulaire de connexion
         require __DIR__ . '/../../templates/connexion.php';

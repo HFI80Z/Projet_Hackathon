@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 );
 
 INSERT INTO users (email, password, nom, prenom, region, role)
-VALUES ('admin@admin.com', 'admin_password_hash', 'Admin', 'Super', 'Paris', 'admin');
+VALUES ('admin@admin.com', '$2y$10$LSqcZjmthp6BPe9yN6p9nOsWEe19t5TmX4/iPB6g/dlkNVCLQiIBq', 'Admin', 'Super', 'Paris', 'admin');
+<-- Password: 123 pour admin
 
 INSERT INTO annonces (titre, description, prix, user_id, image)
 VALUES ('Appartement à louer', 'Appartement cosy au centre-ville', 120.00, 1, 'appartement.jpg');
