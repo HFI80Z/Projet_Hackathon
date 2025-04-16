@@ -1,26 +1,21 @@
-<?php  
-ob_start(); 
-?>
+<?php ob_start(); ?>
 
-<!-- Hero Section -->
 <div class="relative bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto">
         <div class="relative z-10 bg-white lg:max-w-2xl lg:w-full">
             <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
-                <!-- Navigation intégrée -->
             </div>
         </div>
     </div>
-
     <main class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6 lg:mt-32">
         <div class="lg:grid lg:grid-cols-12 lg:gap-8">
             <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                 <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                     <span class="block text-indigo-600 xl:inline">EFREI BNB</span>
-                    <span class="block text-gray-900 mt-3">Votre escapade parisienne</span>
+                    <span class="block text-gray-900 mt-3">Votre plateforme de location</span>
                 </h1>
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Découvrez des logements uniques au cœur de Paris et ses alentours
+                    Découvrez des logements uniques et mettez les vôtres en location
                 </p>
                 <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
                     <div class="rounded-md shadow">
@@ -36,22 +31,21 @@ ob_start();
             <div class="mt-12 relative lg:col-span-6 lg:mt-0">
                 <div class="relative mx-auto w-full rounded-lg shadow-xl overflow-hidden">
                     <div class="absolute inset-0"></div>
-                    <img class="w-full h-56 object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="/images/photo.jpg" alt="Paris skyline">
+                    <img class="w-full h-56 object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="/images/photo.jpg" alt="Image d'accueil">
                 </div>
             </div>
         </div>
     </main>
 </div>
 
-<!-- Featured Section -->
 <div class="relative bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Nos dernières pépites
+                Nos dernières annonces
             </h2>
             <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                Une sélection exclusive de logements chargés d'histoire
+                Une sélection exclusive de logements disponibles
             </p>
         </div>
 
@@ -70,13 +64,13 @@ ob_start();
             </div>
         </div>
 
-        <!-- Annonces Grid -->
+        <?php if (!empty($annonces)): ?>
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <?php foreach ($annonces as $annonceItem): ?>
             <div class="group bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div class="relative h-48 w-full overflow-hidden rounded-t-2xl">
                     <?php if (!empty($annonceItem['image'])): ?>
-                    <img src="/uploads/<?= htmlspecialchars($annonceItem['image']) ?>" 
+                    <img src="/images/<?= htmlspecialchars($annonceItem['image']) ?>" 
                          alt="<?= htmlspecialchars($annonceItem['titre']) ?>" 
                          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                     <?php else: ?>
@@ -94,9 +88,6 @@ ob_start();
                         <h3 class="text-xl font-semibold text-gray-900">
                             <?= htmlspecialchars($annonceItem['titre']) ?>
                         </h3>
-                        <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-2.5 py-0.5 rounded-full">
-                            ★ 4,9
-                        </span>
                     </div>
                     
                     <p class="text-gray-600 line-clamp-2 mb-6">
@@ -110,31 +101,55 @@ ob_start();
                             </span>
                             <span class="text-gray-500">/nuit</span>
                         </div>
-                        <div class="flex space-x-2">
-                            <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $annonceItem['user_id']): ?>
-                            <a href="/modifier-annonce?id=<?= $annonceItem['id'] ?>" 
-                               class="p-2 text-gray-400 hover:text-indigo-600 transition-colors"
-                               title="Modifier">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                                </svg>
-                            </a>
-                            <?php endif; ?>
-                            <a href="/reserver-annonce?id=<?= $annonceItem['id'] ?>" 
-                               class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                Réserver
-                            </a>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                <a href="/profil?id=<?= htmlspecialchars($annonceItem['user_id']) ?>" class="hover:text-indigo-600">
+                                    Par <?= htmlspecialchars($annonceItem['prenom'] . ' ' . $annonceItem['nom']) ?>
+                                </a>
+                            </div>
+                            <div class="flex space-x-2">
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <?php if ($_SESSION['user_id'] === $annonceItem['user_id']): ?>
+                                        <a href="/modifier-annonce?id=<?= $annonceItem['id'] ?>" 
+                                           class="p-2 text-gray-400 hover:text-indigo-600 transition-colors"
+                                           title="Modifier">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                            </svg>
+                                        </a>
+                                        <a href="/supprimer-annonce?id=<?= $annonceItem['id'] ?>" 
+                                           class="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                                           title="Supprimer">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </a>
+                                    <?php else: ?>
+                                        <form action="/reserver-annonce" method="POST" class="inline">
+                                            <input type="hidden" name="annonce_id" value="<?= $annonceItem['id'] ?>">
+                                            <button type="submit" class="flex items-center px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm">
+                                                Réserver
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+                                    <form action="/sendMessageToAdvertiser" method="POST" class="inline">
+                                        <input type="hidden" name="annonce_id" value="<?= $annonceItem['id'] ?>">
+                                        <button type="submit" class="flex items-center px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm ml-2">
+                                            Message
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
-
-        <?php if (empty($annonces)): ?>
+        <?php else: ?>
         <div class="text-center py-20">
             <div class="inline-block p-8 bg-white rounded-2xl shadow-lg">
                 <div class="mx-auto h-24 w-24 text-indigo-600 mb-4">
@@ -157,4 +172,4 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-require __DIR__ . '/layout.php'; 
+require __DIR__ . '/layout.php';
