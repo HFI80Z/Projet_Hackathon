@@ -9,6 +9,7 @@ use App\Controllers\AnnonceController;
 use App\Controllers\MessageController; // Ajout du nouveau contrôleur
 use App\Database\Database;
 use App\Models\AnnonceModel;
+use App\Controllers\OtherController;
 
 // Activer l'affichage des erreurs
 ini_set('display_errors', 1);
@@ -40,14 +41,49 @@ switch ($uri) {
         $controller->afficherProfil();
         break;
 
+    case '/creer-annonce': 
+        $controller = new OtherController();
+        $controller->creerAnnonce();
+        break;
+    
+    case '/reservation': 
+        $controller = new OtherController();
+        $controller->reservation();
+        break;
+
+    case '/ajouter-annonce': 
+        $controller = new AnnonceController();
+        $controller->ajouterAnnonce();
+        break;
+    
+    case '/modifier-annonce': 
+        $controller = new AnnonceController();
+        $controller->modifierAnnonce();
+        break;
+    
+    case '/supprimer-annonce':
+        $controller = new AnnonceController();
+        $controller->supprimerAnnonce();
+        break;
+    
+    case '/reserver-annonce': 
+        $controller = new AnnonceController();
+        $controller->reserverAnnonce();
+        break;
+    
+    case '/supprimer-reservation': 
+        $controller = new AnnonceController();
+        $controller->supprimerReservation();
+        break;
+    
     case '/modifier-compte':
         if (isset($_SESSION['user_id'])) {
-            $controller = new UserController();
-            $controller->modifierCompte();
-        } else {
-            header('Location: /connexion');
-        }
-        break;
+        $controller = new UserController();
+        $controller->modifierCompte();
+    } else {
+        header('Location: /connexion');
+    }
+    break;
 
     case '/deconnexion':
         $controller = new AuthController();
