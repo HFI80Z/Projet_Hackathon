@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 
 <div class="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
-    <!-- Hero Section -->
     <div class="relative bg-blue-600 py-20">
         <div class="absolute inset-0 bg-black opacity-20"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
