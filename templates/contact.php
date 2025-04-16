@@ -1,15 +1,15 @@
 <?php ob_start(); ?>
 
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
-    <!-- Hero Section -->
-    <div class="relative bg-blue-600 py-20">
-        <div class="absolute inset-0 bg-black opacity-20"></div>
+<div class="min-h-screen bg-white">
+    <!-- Hero Section avec fond bleu -->
+    <div class="relative py-20">
+        <div class="absolute inset-0"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+                <h1 class="font-extrabold tracking-tight sm:text-5xl md:text-6xl block text-indigo-600 xl:inline">
                     Contactez notre équipe
                 </h1>
-                <p class="mt-3 max-w-md mx-auto text-lg text-blue-100 sm:text-xl md:mt-5 md:max-w-3xl">
+                <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
                     Nous sommes là pour répondre à toutes vos questions en moins de 24h
                 </p>
             </div>
@@ -20,7 +20,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <!-- Contact Info Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
                 <div class="p-8">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Nos coordonnées</h2>
                     
@@ -115,7 +115,7 @@
             </div>
 
             <!-- Contact Form Card -->
-            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
                 <div class="p-8 sm:p-10">
                     <h2 class="text-2xl font-bold text-gray-900 mb-2">Envoyez-nous un message</h2>
                     <p class="text-gray-500 mb-8">Remplissez ce formulaire et nous vous répondrons dès que possible</p>
@@ -224,7 +224,7 @@
         </div>
         
         <!-- FAQ Section -->
-        <div class="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="mt-16 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
             <div class="p-8 sm:p-10">
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Questions fréquentes</h2>
                 
@@ -277,7 +277,7 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Team Member 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-200">
                     <div class="h-48 bg-blue-100 flex items-center justify-center">
                         <svg class="h-24 w-24 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -291,7 +291,7 @@
                 </div>
                 
                 <!-- Team Member 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-200">
                     <div class="h-48 bg-blue-100 flex items-center justify-center">
                         <svg class="h-24 w-24 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -305,7 +305,7 @@
                 </div>
                 
                 <!-- Team Member 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-200">
                     <div class="h-48 bg-blue-100 flex items-center justify-center">
                         <svg class="h-24 w-24 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -319,7 +319,7 @@
                 </div>
                 
                 <!-- Team Member 4 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-200">
                     <div class="h-48 bg-blue-100 flex items-center justify-center">
                         <svg class="h-24 w-24 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>

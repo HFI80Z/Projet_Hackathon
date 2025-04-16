@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Database;
 
 class UserController
 {
@@ -15,10 +16,10 @@ class UserController
         $userId = $_SESSION['user_id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom = $_POST['nom'] ?? '';
+            $nom    = $_POST['nom'] ?? '';
             $prenom = $_POST['prenom'] ?? '';
             $region = $_POST['region'] ?? '';
-            $email = $_POST['email'] ?? '';
+            $email  = $_POST['email'] ?? '';
 
             if (!empty($nom) && !empty($prenom) && !empty($region) && !empty($email)) {
                 UserModel::updateUser($userId, $nom, $prenom, $region, $email);
@@ -32,7 +33,7 @@ class UserController
         require __DIR__ . '/../../templates/modifier-compte.php';
     }
 
-    // Nouvelle méthode pour afficher le profil d'un utilisateur
+    // Afficher un profil d'utilisateur
     public function afficherProfil()
     {
         $userId = $_GET['id'] ?? null;
@@ -46,7 +47,6 @@ class UserController
             }
         }
 
-        // Si l'utilisateur n'existe pas, afficher une erreur ou rediriger
         header('Location: /');
         exit;
     }
