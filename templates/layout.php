@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Efrei BNB</title>
+    <title>EFREI BNB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -70,6 +70,7 @@
                             <a href="/connexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a>
                             <a href="/inscription" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inscription</a>
                         <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,27 +93,45 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Animation de la navbar qui se cache au défilement
         const navbar = document.querySelector("nav");
         let lastScrollTop = 0;
         
-        // Ajoutez ces classes dans votre style existant
         navbar.style.transition = "transform 0.3s ease-in-out";
         
         window.addEventListener("scroll", function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Déterminer la direction du défilement
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Défilement vers le bas et pas tout en haut
                 navbar.style.transform = "translateY(-100%)";
             } else {
-                // Défilement vers le haut
                 navbar.style.transform = "translateY(0)";
             }
             
             lastScrollTop = scrollTop;
         });
+
+        // Fonctionnalité du menu utilisateur
+        const userMenuButton = document.querySelector(".user-menu button");
+        const userMenuContent = document.querySelector(".user-menu-content");
+
+        if (userMenuButton && userMenuContent) {
+            userMenuButton.addEventListener("click", function(e) {
+                e.stopPropagation();
+                userMenuContent.classList.toggle("hidden");
+            });
+
+            // Fermer le menu quand on clique ailleurs sur la page
+            document.addEventListener("click", function() {
+                userMenuContent.classList.add("hidden");
+            });
+
+            // Empêcher la fermeture lors d'un clic à l'intérieur du menu
+            userMenuContent.addEventListener("click", function(e) {
+                e.stopPropagation();
+            });
+        }
     });
-</script>
+    </script>
 </body>
 </html>
