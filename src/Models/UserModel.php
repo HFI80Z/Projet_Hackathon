@@ -34,7 +34,24 @@ class UserModel
             ':id' => $id
         ]);
     }
-
+    public static function updateUserByAdmin($id, $nom, $prenom, $email, $role)
+{
+    $db = Database::getConnection();
+    $sql = "UPDATE users
+        SET nom = :nom,
+            prenom = :prenom,
+            email = :email,
+            role = :role
+        WHERE id = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':nom' => $nom,
+        ':prenom' => $prenom,
+        ':email' => $email,
+        ':role' => $role,
+        ':id' => $id
+    ]);
+    }
     public static function getUserByEmail($email)
     {
         $db = Database::getConnection();

@@ -166,6 +166,24 @@ switch ($uri) {
             header('Location: /connexion');
         }
         break;
+        case '/admin/modifier-annonce':
+            if (isset($_SESSION['user_id'])) {
+                $controller = new AdminController();
+                $controller->modifierAnnonce();
+            } else {
+                header('Location: /connexion');
+                exit;
+            }
+            break;
+        case '/admin/modifier-user':
+            if (isset($_SESSION['user_id'])) {
+                $controller = new AdminController();
+                $controller->modifierUtilisateur();
+            } else {
+                header('Location: /connexion');
+                exit;
+            }
+            break;
 
     case '/messages/supprimer-conversation':
         if (isset($_SESSION['user_id'])) {
