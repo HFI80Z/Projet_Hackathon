@@ -59,7 +59,6 @@ class UserModel
         ]);
     }
 
-    // Nouvelle méthode pour récupérer le profil d'un utilisateur par ID
     public static function getUserProfileById($id)
     {
         $db = Database::getConnection();
@@ -69,7 +68,6 @@ class UserModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Ajouter cette méthode à votre classe UserModel existante
     public static function searchUsers($term, $excludeUserId = null)
     {
         $db = Database::getConnection();
@@ -92,5 +90,27 @@ class UserModel
 
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function deleteUser($userId)
+    {
+        $db = Database::getConnection();
+        $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
+        $stmt->bindParam(':id', $userId, \PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public static function getAllUsers()
+    {
+        $db = Database::getConnection();
+        $sql = "SELECT id, email, nom, prenom, role FROM users ORDER BY id";
+        $stmt = $db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public static function getUserCount() {
+        $db = Database::getConnection();
+        $query = "SELECT COUNT(*) as count FROM users";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result['count'] ?? 0;
     }
 }

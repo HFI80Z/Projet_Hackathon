@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Efrei BNB</title>
+    <title>EFREI BNB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+        }
+
+        nav {
+            height: 70px; 
+        }
+
+        main {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -18,8 +28,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center h-16">
                     <a href="/" class="flex-shrink-0 flex items-center h-full">
-                        <img class="max-h-full w-auto" src="/images/logo.png" alt="Logo Efrei BNB">
-                        <span class="ml-2 text-xl font-semibold text-blue-900">Efrei BNB</span>
+                        <img class="max-h-[200px] max-w-[200px] object-contain" src="/images/logo.png" alt="Logo Efrei BNB">
                     </a>
                 </div>
                 <?php $current = $_SERVER['REQUEST_URI']; ?>
@@ -49,7 +58,6 @@
                             </svg>
                             <img class="h-8 w-8 rounded-full" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Compte">
                         </button>
-
                         <div class="user-menu-content hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
@@ -62,16 +70,9 @@
                             <a href="/connexion" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a>
                             <a href="/inscription" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inscription</a>
                         <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="md:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="/" class="bg-blue-50 border-blue-900 text-blue-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Accueil</a>
-                <a href="/reservation" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Réservation</a>
-                <a href="/creer-annonce" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Mettre une annonce</a>
-                <a href="/contact" class="border-transparent text-gray-600 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-900 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Nous contacter</a>
             </div>
         </div>
     </nav>
@@ -91,23 +92,46 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButton = document.querySelector(".user-menu button");
-            const menuContent = document.querySelector(".user-menu-content");
-
-            toggleButton.addEventListener("click", function (e) {
-                e.stopPropagation();
-                menuContent.classList.toggle("hidden");
-            });
-
-            document.addEventListener("click", function () {
-                menuContent.classList.add("hidden");
-            });
-
-            menuContent.addEventListener("click", function (e) {
-                e.stopPropagation();
-            });
+    document.addEventListener("DOMContentLoaded", function() {
+        // Animation de la navbar qui se cache au défilement
+        const navbar = document.querySelector("nav");
+        let lastScrollTop = 0;
+        
+        navbar.style.transition = "transform 0.3s ease-in-out";
+        
+        window.addEventListener("scroll", function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.style.transform = "translateY(-100%)";
+            } else {
+                navbar.style.transform = "translateY(0)";
+            }
+            
+            lastScrollTop = scrollTop;
         });
+
+        // Fonctionnalité du menu utilisateur
+        const userMenuButton = document.querySelector(".user-menu button");
+        const userMenuContent = document.querySelector(".user-menu-content");
+
+        if (userMenuButton && userMenuContent) {
+            userMenuButton.addEventListener("click", function(e) {
+                e.stopPropagation();
+                userMenuContent.classList.toggle("hidden");
+            });
+
+            // Fermer le menu quand on clique ailleurs sur la page
+            document.addEventListener("click", function() {
+                userMenuContent.classList.add("hidden");
+            });
+
+            // Empêcher la fermeture lors d'un clic à l'intérieur du menu
+            userMenuContent.addEventListener("click", function(e) {
+                e.stopPropagation();
+            });
+        }
+    });
     </script>
 </body>
 </html>

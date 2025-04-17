@@ -10,6 +10,9 @@ use App\Controllers\MessageController;
 use App\Database\Database;
 use App\Models\AnnonceModel;
 use App\Controllers\OtherController;
+use App\Controllers\AdminController;
+use App\Models\MessageModel;
+use App\Models\UserModel;
 
 // Activer l'affichage des erreurs
 ini_set('display_errors', 1);
@@ -130,7 +133,39 @@ switch ($uri) {
             header('Location: /connexion');
         }
         break;
-
+    case '/admin':
+        if (isset($_SESSION['user_id']) ){
+            $controller = new AdminController();
+            $controller->index();
+        } else {
+            header('Location: /connexion');
+            exit;
+        }
+        break;
+    case '/admin/utilisateurs':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new AdminController();
+            $controller->listeUtilisateurs();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+    case '/admin/supprimer-user':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new AdminController();
+            $controller->supprimerUtilisateur();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
+    case '/admin/supprimer-annonce':
+        if (isset($_SESSION['user_id'])) {
+            $controller = new \App\Controllers\AdminController();
+            $controller->supprimerAnnonce();
+        } else {
+            header('Location: /connexion');
+        }
+        break;
 
     case '/messages/supprimer-conversation':
         if (isset($_SESSION['user_id'])) {

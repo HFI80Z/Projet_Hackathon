@@ -8,13 +8,18 @@ use App\Database\Database;
 
 class AnnonceController
 {
-    // Affiche toutes les annonces
-    public function index()
-    {
-        // Récupérer toutes les annonces depuis le modèle
-        $annonces = AnnonceModel::getAllAnnonces();
-
-        // Charger la vue accueil.php avec les annonces
+    public function index() {
+        // Récupérer le terme de recherche s'il existe
+        $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+        
+        // Récupérer les annonces (filtrées si un terme de recherche est présent)
+        if (!empty($searchTerm)) {
+            $annonces = \App\Models\AnnonceModel::searchAnnonces($searchTerm);
+        } else {
+            $annonces = \App\Models\AnnonceModel::getAllAnnonces();
+        }
+        
+        // Afficher la vue avec les annonces
         require __DIR__ . '/../../templates/accueil.php';
     }
 

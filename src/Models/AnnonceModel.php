@@ -109,7 +109,7 @@ class AnnonceModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Nouvelle méthode pour supprimer une réservation
+    // Supprimer une réservation
     public static function deleteReservation($reservationId, $userId)
     {
         $db = Database::getConnection();
@@ -119,5 +119,30 @@ class AnnonceModel
             ':reservation_id' => $reservationId,
             ':user_id' => $userId
         ]);
+    }
+    public static function getAnnonceCount() {
+        $db = Database::getConnection();
+        $query = "SELECT COUNT(*) as count FROM annonces";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result['count'] ?? 0;
+    }
+    public static function searchAnnonces($searchTerm)
+    {
+        $db = Database::getConnection();
+        $query = "SELECT a.*, u.prenom, u.nom 
+                  FROM annonces a 
+                  JOIN users u ON a.user_id = u.id 
+                  WHERE a.titre LIKE :search 
+                  OR a.description LIKE :search 
+                  ORDER BY a.created_at DESC";
+
+        $stmt = $db->prepare($query);
+        $searchParam = '%' . $searchTerm . '%';
+        $stmt->bindParam(':search', $searchParam);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
