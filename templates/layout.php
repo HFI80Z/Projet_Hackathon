@@ -60,7 +60,7 @@
                         </button>
                         <div class="user-menu-content hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                         <?php if (isset($_SESSION['user_id'])): ?>
-                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                            <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
                                 <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Panel Administrateur</a>
                             <?php endif; ?>
                             <a href="/modifier-compte" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Compte</a>
