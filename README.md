@@ -31,7 +31,7 @@ https://www.canva.com/design/DAGkxwCjILA/wUplEVDzT-c5Fyw_Mf3D7w/view?utm_content
 # Clonez le repository : 
 ```
 git clone https://github.com/HFI80Z/Projet_Hackathon.git
-cd Projet_Challenge_Web
+cd Projet_Hackathon
 ```  
 # Lancez l'application avec Docker Compose : 
 ```
