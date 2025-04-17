@@ -17,7 +17,7 @@ class AuthController
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_prenom'] = $user['prenom'];
-                $_SESSION['user_role'] = $user['role']; // Modification pour correspondre aux vérifications ailleurs
+                $_SESSION['user_role'] = $user['role'];
                 header('Location: /');
                 exit;
             }
@@ -43,8 +43,6 @@ class AuthController
                 exit;
             }
         }
-
-        // Afficher le formulaire d'inscription
         require __DIR__ . '/../../templates/inscription.php';
     }
 
