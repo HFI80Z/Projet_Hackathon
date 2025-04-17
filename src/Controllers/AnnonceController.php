@@ -91,11 +91,11 @@ class AnnonceController
             }
 
             // Rediriger vers la page d'accueil après l'ajout
-            header('Location: /accueil');
+            header('Location: /');
             exit;
         }
 
-        header('Location: /accueil');
+        header('Location: /');
     }
 
     // Modifie une annonce
