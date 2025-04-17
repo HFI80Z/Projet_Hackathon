@@ -3,8 +3,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header -->
     <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Messagerie</h1>
-        <a href="/messages/nouveau" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+        <h1 class="text-3xl font-bold text-gray-900 mr-11">Messagerie</h1>
+        <a href="/messages/nouveau" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center ml-20">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
             </svg>
@@ -56,9 +56,9 @@
 
                             <!-- Delete Button -->
                             <div class="flex items-center">
-                                <a href="/messages/supprimer-conversation?id=<?= $conv['contact_id'] ?>" 
-                                   onclick="return confirm('Voulez-vous vraiment supprimer cette conversation ?')"
-                                   class="text-gray-400 hover:text-red-600 p-2 rounded-lg transition-colors">
+                                <a href="/messages/supprimer-conversation?id=<?= $conv['contact_id'] ?>"
+                                    onclick="return confirm('Voulez-vous vraiment supprimer cette conversation ?')"
+                                    class="text-gray-400 hover:text-red-600 p-2 rounded-lg transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                     </svg>
