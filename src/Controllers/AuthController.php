@@ -20,7 +20,7 @@ class AuthController
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_prenom'] = $user['prenom'];
-                $_SESSION['role'] = $user['role']; // 👈 Ajoute cette ligne
+                $_SESSION['user_role'] = $user['role']; // Modification pour correspondre aux vérifications ailleurs
                 header('Location: /');
                 exit;
             } else {
