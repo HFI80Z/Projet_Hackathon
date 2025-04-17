@@ -78,7 +78,7 @@ class AnnonceController
             // Gestion de l'image
             $imageName = null;
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/../../public/uploads/';
+                $uploadDir = __DIR__ . '/../../public/images/';  // Modifié pour le répertoire 'images'
                 $tmpFile = $_FILES['image']['tmp_name'];
                 $originalName = $_FILES['image']['name'];
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
@@ -122,12 +122,31 @@ class AnnonceController
 
                     // Gestion de l'image
                     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                        $uploadDir = __DIR__ . '/../../public/uploads/';
+                        $uploadDir = __DIR__ . '/../../public/images/';  // Modifié pour le répertoire 'images'
                         $tmpFile = $_FILES['image']['tmp_name'];
                         $originalName = $_FILES['image']['name'];
                         $extension = pathinfo($originalName, PATHINFO_EXTENSION);
                         $imageName = uniqid('img_', true) . '.' . $extension;
-                        move_uploaded_file($tmpFile, $uploadDir . $imageName);
+
+                        // Vérification de l'extension de l'image
+                        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+                        if (!in_array($extension, $allowedExtensions)) {
+                            echo "Extension non autorisée.";
+                            exit;
+                        }
+
+                        // Vérification de la taille (max 10MB)
+                        if ($_FILES['image']['size'] > 10 * 1024 * 1024) {
+                            echo "Le fichier est trop volumineux.";
+                            exit;
+                        }
+
+                        // Déplacer le fichier
+                        $destination = $uploadDir . $imageName;
+                        if (!move_uploaded_file($tmpFile, $destination)) {
+                            echo "Erreur lors de l'upload de l'image.";
+                            exit;
+                        }
                     } else {
                         $imageName = $_POST['current_image'] ?? $annonce['image'];
                     }
