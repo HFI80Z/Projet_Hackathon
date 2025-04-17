@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\UserModel;
@@ -7,6 +8,8 @@ class AuthController
 {
     public function connexion()
     {
+        $error = null; // Pour stocker le message d'erreur
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
@@ -20,11 +23,12 @@ class AuthController
                 $_SESSION['role'] = $user['role']; // 👈 Ajoute cette ligne
                 header('Location: /');
                 exit;
+            } else {
+                $error = "Adresse e-mail ou mot de passe incorrect.";
             }
+        }
 
-    }
-
-        // Afficher le formulaire de connexion
+        // Afficher le formulaire de connexion avec potentiellement une erreur
         require __DIR__ . '/../../templates/connexion.php';
     }
 
